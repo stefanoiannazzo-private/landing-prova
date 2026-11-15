@@ -1,0 +1,525 @@
+{
+ "start": "2026-11-15T15:56:46.377Z",
+ "round": 3,
+ "idle": 0,
+ "errors": 0,
+ "status": "open",
+ "history": [
+  {
+   "at": "2026-11-15T16:50:06.149Z",
+   "mode": "manual",
+   "status": "fail",
+   "fails": 4,
+   "round": 1,
+   "reused": false,
+   "stopHookActive": false
+  },
+  {
+   "at": "2026-11-15T16:52:47.948Z",
+   "mode": "manual",
+   "status": "fail",
+   "fails": 4,
+   "round": 2,
+   "reused": false,
+   "stopHookActive": false
+  },
+  {
+   "at": "2026-11-15T16:56:49.412Z",
+   "mode": "manual",
+   "status": "open",
+   "fails": 1,
+   "round": 3,
+   "reused": false,
+   "stopHookActive": false
+  }
+ ],
+ "max": 3,
+ "marker": {
+  "page": "index.html",
+  "dir": "/home/claude/landing",
+  "kind": "software",
+  "start": "2026-11-15T15:56:46.377Z",
+  "by": "start.mjs",
+  "url": null,
+  "category": "monitoraggio siti per web agency",
+  "primary": "Inizia la prova gratuita"
+ },
+ "manual": true,
+ "roundKey": "3849da45d195bd7c:788ad8df",
+ "roundFree": false,
+ "idleFree": false,
+ "blockKey": null,
+ "fp": "3849da45d195bd7c",
+ "page": "index.html",
+ "found": {
+  "fails": [
+   {
+    "check": "scroll-reveal",
+    "where": "div.wrap > div.grid > div.frame.frame--split > div.dg \"Hotel Miralago Milano 182 ms Francoforte\"",
+    "msg": "starts \"color\" (0.2 s) the moment it is scrolled into view (an IntersectionObserver) on div.dg-node.dg-node--core-pill",
+    "fix": "show it at rest: no fade, rise or unmask when it is scrolled into view",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "scroll-reveal"
+    ],
+    "wheres": [
+     "div.wrap > div.grid > div.frame.frame--split > div.dg \"Hotel Miralago Milano 182 ms Francoforte\""
+    ]
+   },
+   {
+    "check": "text-only",
+    "where": "section#faq \"Domande\"",
+    "msg": "the closing section is only text: no picture, icon, mock or effect in it",
+    "fix": "give the section a visual: a photograph that fits, the real icons, or a UI fragment on a ground",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency",
+    "ids": [
+     "text-only"
+    ],
+    "wheres": [
+     "section#faq \"Domande\""
+    ]
+   },
+   {
+    "check": "copy-headings",
+    "where": "div.group > div.grid > article.card.card--row:nth-of-type(2) > h3 \"Avvisa prima che scada il certificato\"",
+    "msg": "\"Avvisa prima che scada il certificato\" names no product, part, place or section (10 headings like it; at most one brand line per page) (and 9 more like it: \"Manda il report al clien\", \"Segnala i plugin da aggi\", \"Prezzi. Al mese, IVA esc\", \"Domande\", ...)",
+    "fix": "name the thing in every heading: the product, a part, the place or a section noun",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "copy-headings"
+    ],
+    "wheres": [
+     "div.group > div.grid > article.card.card--row:nth-of-type(2) > h3 \"Avvisa prima che scada il certificato\""
+    ]
+   },
+   {
+    "check": "cut-text",
+    "where": "div.dg-nodes > div.dg-node.dg-node--tile:nth-of-type(1) > span.dg-cap > span.dg-cap__l \"Ottobre\"",
+    "msg": "runs past the edge of its box div.panel > div.dg > div.dg-nodes > div.dg-node.dg-node--tile:nth-of-type(1) (and 3 more like it: \"Miralago\", \"Valdora\", \"Bersani\")",
+    "fix": "give the text room: no overflow clipping a line, no line past its box",
+    "widths": [
+     390
+    ],
+    "from": "consistency",
+    "ids": [
+     "cut-text"
+    ],
+    "wheres": [
+     "div.dg-nodes > div.dg-node.dg-node--tile:nth-of-type(1) > span.dg-cap > span.dg-cap__l \"Ottobre\""
+    ]
+   },
+   {
+    "check": "hole",
+    "where": "section#pricing \"Prezzi. Al mese, IVA esclusa.\"",
+    "msg": "an empty hole 272x368px inside the section (44% of the screen's height), with content above and below it",
+    "fix": "close the empty space: move the content together, or give the space the visual it lacks",
+    "widths": [
+     390
+    ],
+    "from": "consistency",
+    "ids": [
+     "hole"
+    ],
+    "wheres": [
+     "section#pricing \"Prezzi. Al mese, IVA esclusa.\""
+    ]
+   }
+  ],
+  "warns": [
+   {
+    "check": "cut-text",
+    "where": "ul.ui-notify__list > li.ui-note:nth-of-type(1) > span.ui-note__text > span.ui-note__body \"Milano e Parigi, Francoforte ancora in a\"",
+    "msg": "shortened with an ellipsis",
+    "fix": "give the text room: no overflow clipping a line, no line past its box",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "cut-text",
+    "where": "ul.ui-notify__list > li.ui-note:nth-of-type(3) > span.ui-note__text > span.ui-note__body \"2,4 secondi per 5 controlli\"",
+    "msg": "cut 14px at the bottom by the overflow of div.group > div.grid > article.card.card--row:nth-of-type(1) > div.panel: a fragment run out through its panel's edge",
+    "fix": "give the text room: no overflow clipping a line, no line past its box",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "scroll-reveal",
+    "where": "section#perche > div.wrap > p.mo-wh__text \"In molte agenzie il guasto di un sito si\"",
+    "msg": "starts \"color\" (0.2 s) the moment it is scrolled into view (an IntersectionObserver) on span.mo-w:nth-of-type(6) (inside a dealt moment's section, [data-moment]: an enter moment is expected on every kind; its still is judged under reduced motion)",
+    "fix": "show it at rest: no fade, rise or unmask when it is scrolled into view",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "same-action",
+    "where": "div.wrap > div.grid > div.span-5.stack-5 > a.link \"Vedi i prezzi\"",
+    "msg": "\"Vedi i prezzi\" is a button in one place and a text link in another: one action in two looks",
+    "fix": "show one action one way: the same button wherever it repeats, or a text link everywhere",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "copy-buttons",
+    "where": "header.nav.nav--centre > div.wrap.nav__bar > div.nav__actions > a.btn.btn--primary \"Inizia la prova gratuita\"",
+    "msg": "\"Inizia la prova gratuita\" does not start with a verb (book, buy, try, start, get, see...) (and 1 more like it: \"Vedi i prezzi\")",
+    "fix": "label buttons with a verb and what the visitor gets (\"Book a room\", \"Start free trial\")",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "text-contrast",
+    "where": "div.ui-win__main > ul.ui-win__rows > li.ui-win__row:nth-of-type(2) > span.ui-win__st \"Online\"",
+    "msg": "11 lines of text in drawn mocks read under 4.5:1 (2 colour pairs), the worst \"Online\" in #5a8d95 on #f7f9f8 at 3.5:1",
+    "fix": "lift the mocks' muted text (labels, meta, initials) to 4.5:1 on their own panel, or set it larger",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-gaps",
+    "where": "section#controlli / section#pricing",
+    "msg": "374px between these sections, +56% against the median 239px of gaps at a change of ground",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-gaps",
+    "where": "section#pricing / section#faq",
+    "msg": "270px between these sections, +26% against the median 214px",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "header.nav.nav--centre > div.wrap.nav__bar > a.nav__logo \"Orbeo\"",
+    "msg": "\"Orbeo\" opens a section headed \"Monitoraggio dei siti per web agency\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "div.wrap.nav__bar > nav.nav__links > div.nav__item:nth-of-type(1) > a.nav__link \"Funzioni\"",
+    "msg": "\"Funzioni\" opens a section headed \"Cosa controlla Orbeo, sito per sito. Disponibilità\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "div.nav__menu > div.wrap.grid > div.menu-col.span-3:nth-of-type(2) > a:nth-of-type(2) \"Aggiornamenti WordPressPlugin in attesa,\"",
+    "msg": "\"Aggiornamenti WordPressPlugin in attesa,\" opens a section headed \"Cosa controlla Orbeo, sito per sito. Disponibilità\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "div.nav__menu > div.wrap.grid > div.menu-col.span-3:nth-of-type(1) > a:nth-of-type(2) \"Certificati e dominiAvviso 30 \"",
+    "msg": "3 entries of one menu go to the same place (#funzioni): \"Certificati e dominiAvviso 30 \", \"Report mensileUn PDF il primo \", \"Aggiornamenti WordPressPlugin \"",
+    "fix": "give each menu entry its own target (its section, its tab, its page), or show fewer entries",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "label-centre",
+    "where": "header.nav.nav--centre > div.wrap.nav__bar > div.nav__actions > a.btn.btn--primary \"Inizia la prova gratuita\"",
+    "msg": "its label sits 18px off-centre (25px of room at the left, 43px at the right)",
+    "fix": "centre the label in its button, or fill the empty side with an icon",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "fade-cut",
+    "where": "ul.ui-notify__list > li.ui-note:nth-of-type(3) > span.ui-note__text > span.ui-note__title \"Pasticceria Sereni è lenta 12m\"",
+    "msg": "2 lines of div.ui.ui-notify fade out under its edge (\"Pasticceria Sereni è l\", \"12m\"): drawn at a fraction of #06525c on #fdffff, half-erased",
+    "fix": "fit the mock's rows inside its panel (fewer rows, a taller panel), or end the fade below the last whole row: no row half-erased",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "copy-length",
+    "where": "section#pricing \"Prezzi. Al mese, IVA esclusa.\"",
+    "msg": "2 sections over 90 words a screen outside the UI mocks (\"Prezzi. Al mese, IVA esc\" 134, \"Domande\" 123); 63 words a screen across the page (500 words in 8 screens): a tech page says it in about 80 or fewer",
+    "fix": "cut every section to its heading, one line and the product UI: the UI says the rest; no second paragraph, no list of feature sentences",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-current",
+    "where": "header.nav.nav--centre",
+    "msg": "the nav stays on screen with 5 links to the page's sections, but never marks the one you are in (no link changes as the page scrolls)",
+    "fix": "mark the link of the section on screen (a colour, a weight or a line under it) as the visitor scrolls",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "button-contrast",
+    "where": "div.hero-text.grid > div.hero__text.span-5 > div.btn-row > a.btn.btn--secondary \"Vedi i prezzi\"",
+    "msg": "the button \"Vedi i prezzi\" (#e4ebeb) stands only 1.14:1 off the ground around it: it reads as part of the ground, or as switched off",
+    "fix": "give the button a fill that stands at least 1.5:1 off what is around it, or an outline in the ink",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "button-contrast",
+    "where": "div.grid > div.pr.pr-a > article.card.card--plan > a.btn.btn--secondary \"Prova il piano Studio\"",
+    "msg": "the button \"Prova il piano Studio\" (#e4ebeb) stands only 1.04:1 off the ground around it: it reads as part of the ground, or as switched off",
+    "fix": "give the button a fill that stands at least 1.5:1 off what is around it, or an outline in the ink",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "button-contrast",
+    "where": "div.grid > div.pr.pr-b > article.card.card--plan > a.btn.btn--secondary \"Prova il piano Agenzia\"",
+    "msg": "the button \"Prova il piano Agenzia\" (#e4ebeb) stands only 1.04:1 off the ground around it: it reads as part of the ground, or as switched off",
+    "fix": "give the button a fill that stands at least 1.5:1 off what is around it, or an outline in the ink",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "visual-caption",
+    "where": "div.ui.ui-panel > div.ui-stat__chart > div.ui-stat__axis > span:nth-of-type(1) \"2 nov\"",
+    "msg": "a muted 13px line of 1 row sits 8px under the drawing (svg): it reads as a caption: \"2 nov\"; no caption or description under any image, render or visual (house rule)",
+    "fix": "take the line away: no caption or description under, over or on any image, render or visual; a licence credit goes in one footer line",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "action-repeat",
+    "where": "header.nav.nav--centre > div.wrap.nav__bar > div.nav__actions > a.btn.btn--primary \"inizia la prova gratuita\"",
+    "msg": "\"inizia la prova gratuita\" shows 2 times on the first screen at 1440px (nav, hero): the nav's button and the hero's; nothing else on the screen may repeat it",
+    "fix": "show the action once a screen besides the nav's button: the hero's, the close's or the phone bar's, never all at once",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-air",
+    "where": "section#controlli / section#pricing",
+    "msg": "503px of air between the content of these two sections: 128-480px (64-600px WARN) (SR-3)",
+    "fix": "keep 128-480px of air between the content of neighbouring sections (112-420px on a phone): the sections' padding (--padt, --padb)",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "cut-text",
+    "where": "div.ui.ui-notify > ul.ui-notify__list > li.ui-note:nth-of-type(1) > span.ui-btn.ui-btn--sm \"Apri\"",
+    "msg": "cut 7px at the top by the overflow of div.group > div.grid > article.card.card--row:nth-of-type(1) > div.panel: a fragment run out through its panel's edge",
+    "fix": "give the text room: no overflow clipping a line, no line past its box",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "cut-text",
+    "where": "div.ui.ui-panel > ul.ui-checks__list > li.ui-check:nth-of-type(2) > span.ui-check__label \"Yoast SEO 26.2\"",
+    "msg": "cut 3px at the bottom by the overflow of div.wrap > div.grid > article.card.card--row:nth-of-type(2) > div.panel: a fragment run out through its panel's edge",
+    "fix": "give the text room: no overflow clipping a line, no line past its box",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "text-contrast",
+    "where": "li.ui-note:nth-of-type(2) > span.ui-note__text > span.ui-note__title > time \"6 nov\"",
+    "msg": "5 lines of text in drawn mocks read under 4.5:1 (2 colour pairs), the worst \"6 nov\" in #5a8d95 on #f7f9f8 at 3.5:1",
+    "fix": "lift the mocks' muted text (labels, meta, initials) to 4.5:1 on their own panel, or set it larger",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-gaps",
+    "where": "main#top > section.hero.hero--collage / section#siti",
+    "msg": "117px between these sections, -49% against the median 229px",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-gaps",
+    "where": "section#faq / footer#contact",
+    "msg": "301px between these sections, +32% against the median 229px",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "empty-area",
+    "where": "footer#contact \"Prova Orbeo sui siti dei tuoi clienti\"",
+    "msg": "42% of the section is empty: 592px of empty rows between its content, 3% beside content that covers under half the container, in its 1491px of rows (WARN over 35%, FAIL over 50%)",
+    "fix": "fill the section: a picture or a second column beside the words, or more of its own content; the section stays one or two screens tall (T-height)",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   }
+  ],
+  "crashed": [],
+  "seconds": {
+   "consistency": 134,
+   "layout": 4
+  }
+ },
+ "open": [
+  {
+   "check": "hole",
+   "where": "section#pricing \"Prezzi. Al mese, IVA esclusa.\"",
+   "msg": "an empty hole 272x368px inside the section (44% of the screen's height), with content above and below it",
+   "fix": "close the empty space: move the content together, or give the space the visual it lacks",
+   "widths": [
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "hole"
+   ],
+   "wheres": [
+    "section#pricing \"Prezzi. Al mese, IVA esclusa.\""
+   ]
+  }
+ ],
+ "waived": [
+  {
+   "check": "scroll-reveal",
+   "where": "div.wrap > div.grid > div.frame.frame--split > div.dg \"Hotel Miralago Milano 182 ms Francoforte\"",
+   "msg": "starts \"color\" (0.2 s) the moment it is scrolled into view (an IntersectionObserver) on div.dg-node.dg-node--core-pill",
+   "fix": "show it at rest: no fade, rise or unmask when it is scrolled into view",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "scroll-reveal"
+   ],
+   "wheres": [
+    "div.wrap > div.grid > div.frame.frame--split > div.dg \"Hotel Miralago Milano 182 ms Francoforte\""
+   ],
+   "reason": "the kit's diagram (assets/diagrams/mount.js) draws its nodes when it first nears the screen; the spec holds it still with pulse none and data-dg-still, the page adds no reveal of its own"
+  },
+  {
+   "check": "text-only",
+   "where": "section#faq \"Domande\"",
+   "msg": "the closing section is only text: no picture, icon, mock or effect in it",
+   "fix": "give the section a visual: a photograph that fits, the real icons, or a UI fragment on a ground",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "text-only"
+   ],
+   "wheres": [
+    "section#faq \"Domande\""
+   ],
+   "reason": "an FAQ is one of the sections allowed without a picture (sections.md section 1), and its neighbour, pricing, carries the real Slack, Telegram and Gmail icons"
+  },
+  {
+   "check": "copy-headings",
+   "where": "div.group > div.grid > article.card.card--row:nth-of-type(2) > h3 \"Avvisa prima che scada il certificato\"",
+   "msg": "\"Avvisa prima che scada il certificato\" names no product, part, place or section (10 headings like it; at most one brand line per page) (and 9 more like it: \"Manda il report al clien\", \"Segnala i plugin da aggi\", \"Prezzi. Al mese, IVA esc\", \"Domande\", ...)",
+   "fix": "name the thing in every heading: the product, a part, the place or a section noun",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "copy-headings"
+   ],
+   "wheres": [
+    "div.group > div.grid > article.card.card--row:nth-of-type(2) > h3 \"Avvisa prima che scada il certificato\""
+   ],
+   "reason": "the page is in Italian: every heading names a thing (certificato, report, plugin, Prezzi, Domande) but the checker reads only English nouns"
+  },
+  {
+   "check": "cut-text",
+   "where": "div.dg-nodes > div.dg-node.dg-node--tile:nth-of-type(1) > span.dg-cap > span.dg-cap__l \"Ottobre\"",
+   "msg": "runs past the edge of its box div.panel > div.dg > div.dg-nodes > div.dg-node.dg-node--tile:nth-of-type(1) (and 3 more like it: \"Miralago\", \"Valdora\", \"Bersani\")",
+   "fix": "give the text room: no overflow clipping a line, no line past its box",
+   "widths": [
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "cut-text"
+   ],
+   "wheres": [
+    "div.dg-nodes > div.dg-node.dg-node--tile:nth-of-type(1) > span.dg-cap > span.dg-cap__l \"Ottobre\""
+   ],
+   "reason": "the kit's lanes diagram sets each node's caption under its tile by design (diagram.css .dg-cap, absolute below the 40px tile); the words are whole and readable in the crop"
+  }
+ ],
+ "warnCount": 28,
+ "at": "2026-11-15T16:56:49.412Z",
+ "openTold": true
+}

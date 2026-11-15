@@ -1,0 +1,24 @@
+{
+  "moments": [
+    {
+      "id": "word-highlight",
+      "at": "2026-11-15T15:56:35.458Z",
+      "seed": "88472732"
+    }
+  ],
+  "palettes": [
+    "teal-on-paper",
+    "teal-on-paper",
+    "teal-on-paper"
+  ],
+  "types": [
+    "geist",
+    "mona",
+    "outfit"
+  ],
+  "dealt": [
+    "geist",
+    "mona",
+    "outfit"
+  ]
+}

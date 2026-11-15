@@ -1,0 +1,7 @@
+[
+ { "check": "copy-headings", "target": "Avvisa prima che scada il certificato", "reason": "the page is in Italian: every heading names a thing (certificato, report, plugin, Prezzi, Domande) but the checker reads only English nouns" },
+ { "check": "text-only", "target": "section#faq", "reason": "an FAQ is one of the sections allowed without a picture (sections.md section 1), and its neighbour, pricing, carries the real Slack, Telegram and Gmail icons" },
+ { "check": "scroll-reveal", "target": "div.frame.frame--split > div.dg", "reason": "the kit's diagram (assets/diagrams/mount.js) draws its nodes when it first nears the screen; the spec holds it still with pulse none and data-dg-still, the page adds no reveal of its own" },
+ { "check": "cut-text", "target": "dg-node--tile:nth-of-type(1) > span.dg-cap", "reason": "the kit's lanes diagram sets each node's caption under its tile by design (diagram.css .dg-cap, absolute below the 40px tile); the words are whole and readable in the crop" },
+ { "check": "scroll-reveal", "target": "close--type > a.btn.btn--primary", "reason": "the only observer on the close's button is the kit's action bar (system.js actionbar(): it watches the twins of its action to step away); the page reveals nothing" }
+]
