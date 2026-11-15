@@ -148,6 +148,130 @@
   #pricing .pr-icons { display: flex; gap: var(--s-3); }
   @media (max-width: 639px) { #pricing .pr-intro { display: none; } #pricing .pr-a .card--plan .checks li:nth-child(n+4) { display: none; } #pricing .pr-b .card--plan .checks li:nth-child(n+6) { display: none; } }
 </style>
+<style>
+  /* ===== nav: floating capsule (desktop + mobile) ===== */
+  .nav { background: transparent; border-bottom: 0; pointer-events: none; transition: color .3s; }
+  .nav > .nav__bar { pointer-events: auto; position: relative; height: calc(var(--nav) - 16px); margin-top: 8px; padding: 0 8px 0 20px;
+    border-radius: 999px; background: color-mix(in oklab, var(--bg) 78%, transparent);
+    -webkit-backdrop-filter: blur(14px) saturate(1.4); backdrop-filter: blur(14px) saturate(1.4);
+    box-shadow: 0 0 0 1px color-mix(in oklab, var(--ink) 12%, transparent), 0 10px 30px -18px rgb(6 82 92 / .5);
+    transition: background-color .35s, box-shadow .35s, transform .35s; }
+  .nav.is-scrolled > .nav__bar { background: color-mix(in oklab, var(--bg) 92%, transparent);
+    box-shadow: 0 0 0 1px color-mix(in oklab, var(--ink) 16%, transparent), 0 18px 40px -16px rgb(6 82 92 / .45); }
+  .nav__logo .mark { transition: transform .6s cubic-bezier(.3,1.6,.5,1); }
+  .nav__logo:hover .mark { transform: rotate(-12deg) scale(1.12); }
+  /* the sliding pill behind the words */
+  .nav__links { position: relative; align-self: center; height: 40px; }
+  .nav__item { height: 40px; position: static; }
+  .nav .nav__link { position: relative; z-index: 1; height: 40px; border-radius: 999px; transition: color .25s; }
+  .nav .nav__link::before, .nav .nav__link[aria-current="page"]::after { display: none; }
+  .nav .nav__link.is-current { color: var(--bg); }
+  .o-ind { position: absolute; z-index: 0; top: 0; left: 0; height: 40px; width: 0; border-radius: 999px; background: var(--ink);
+    opacity: 0; transform: translateX(var(--x, 0)); width: var(--w, 0);
+    transition: transform .45s cubic-bezier(.5,1.4,.4,1), width .45s cubic-bezier(.5,1.4,.4,1), opacity .25s, background-color .25s; }
+  .o-ind.is-on { opacity: 1; }
+  .o-ind.is-hover { background: color-mix(in oklab, var(--ink) 12%, transparent); }
+  .nav .nav__link.is-hot { color: var(--ink); }
+  .nav .nav__link.is-current.is-hot { color: var(--bg); }
+  /* the desktop drop-down becomes a floating card under the capsule */
+  @media (min-width: 1024px) {
+    .nav .nav__menu { left: 50%; right: auto; width: min(640px, 100vw - 2 * var(--gut)); top: calc(100% + 6px); border-radius: 24px; border: 0;
+      box-shadow: 0 0 0 1px color-mix(in oklab, var(--ink) 12%, transparent), 0 30px 60px -30px rgb(6 82 92 / .55);
+      padding: var(--s-6) 0; transform: translate(-50%, -8px); }
+    .nav .nav__item:hover > .nav__menu, .nav .nav__item:focus-within > .nav__menu { transform: translate(-50%, 0); }
+    .nav .nav__menu .wrap { width: 100%; padding-inline: var(--s-7); }
+    .nav .nav__menu .menu-col { grid-column: span 6; }
+    .nav .nav__actions .btn { height: 44px; }
+  }
+
+  /* ===== menu button: a filled circle whose two lines become an X ===== */
+  .o-toggle { display: none; }
+  @media (max-width: 1023px) {
+    .nav > .nav__bar { padding: 0 6px 0 16px; }
+    .o-toggle { display: inline-grid; place-items: center; position: relative; flex: none; margin-left: auto; width: 44px; height: 44px; border: 0; border-radius: 50%;
+      background: var(--ink); color: var(--bg); cursor: pointer; transition: background-color .4s, color .4s, transform .25s; }
+    .nav:not(.is-open) .nav__actions + .o-toggle { margin-left: 0; }
+    :root:has(> body > nav.actionbar) .nav .o-toggle { margin-left: auto; }
+    .o-toggle:active { transform: scale(.92); }
+    .o-toggle__line { position: absolute; left: 13px; width: 18px; height: 2px; border-radius: 2px; background: currentColor;
+      transition: transform .5s cubic-bezier(.7,0,.2,1), width .3s; }
+    .o-toggle__line:first-child { transform: translateY(-4px); }
+    .o-toggle__line:last-child { transform: translateY(4px); width: 11px; }
+    html.o-open .o-toggle { background: var(--bg); color: var(--ink); }
+    html.o-open .o-toggle__line:first-child { transform: rotate(45deg); }
+    html.o-open .o-toggle__line:last-child { transform: rotate(-45deg); width: 18px; }
+    /* while the menu is open the capsule goes clear and light on the teal */
+    html.o-open .nav > .nav__bar { background: transparent; box-shadow: 0 0 0 1px rgb(255 255 255 / .18); -webkit-backdrop-filter: none; backdrop-filter: none; }
+    html.o-open .nav { color: var(--bg); }
+    html.o-open .nav .nav__logo .mark { background: var(--bg); }
+    html.o-open .nav .nav__actions { visibility: hidden; }
+    html.o-open, html.o-open body { overflow: hidden; }
+  }
+
+  /* ===== the full-screen mobile menu ===== */
+  .o-menu { display: none; }
+  @media (max-width: 1023px) {
+    .o-menu { display: block; position: fixed; inset: 0; z-index: 49; visibility: hidden; color: #f7f9f8; pointer-events: none; transition: visibility 0s linear .8s; }
+    html.o-open .o-menu { visibility: visible; pointer-events: auto; transition-delay: 0s; }
+    /* the iris: a circle that grows from the button until it covers the screen */
+    .o-menu__bg { position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at var(--ox, 90%) var(--oy, 4%), rgb(255 255 255 / .10), transparent 45%),
+        repeating-radial-gradient(circle at var(--ox, 90%) var(--oy, 4%), rgb(255 255 255 / .05) 0 1px, transparent 1px 64px),
+        #06525c;
+      clip-path: circle(0px at var(--ox, 90%) var(--oy, 4%));
+      transition: clip-path .75s cubic-bezier(.7,0,.2,1) .05s; }
+    html.o-open .o-menu__bg { clip-path: circle(150vmax at var(--ox, 90%) var(--oy, 4%)); transition-delay: 0s; }
+    /* three radar pings leave the button as it opens */
+    .o-menu__rings i { position: absolute; left: var(--ox, 90%); top: var(--oy, 4%); width: 60px; height: 60px; margin: -30px 0 0 -30px; border-radius: 50%;
+      border: 1.5px solid rgb(247 249 248 / .55); opacity: 0; }
+    html.o-open .o-menu__rings i { animation: o-ping 1.6s cubic-bezier(.2,.6,.3,1) forwards; }
+    html.o-open .o-menu__rings i:nth-child(2) { animation-delay: .18s; }
+    html.o-open .o-menu__rings i:nth-child(3) { animation-delay: .36s; }
+    @keyframes o-ping { 0% { opacity: .9; transform: scale(.4); } 100% { opacity: 0; transform: scale(18); } }
+    /* the brand's arc, huge and faint, rising in the corner */
+    .o-menu__mark.mark { position: absolute; right: -18vw; bottom: -10vw; width: 78vw; height: 78vw; max-width: 520px; max-height: 520px; background: rgb(255 255 255 / .06);
+      transform: translateY(30%) rotate(-8deg); opacity: 0; transition: transform .9s cubic-bezier(.2,.8,.2,1), opacity .5s; }
+    html.o-open .o-menu__mark.mark { transform: none; opacity: 1; transition-delay: .3s; }
+
+    .o-menu__inner { position: relative; height: 100%; overflow-y: auto; display: flex; flex-direction: column;
+      padding: calc(var(--nav) + var(--s-6)) var(--gut) calc(var(--s-6) + env(safe-area-inset-bottom)); }
+    .o-menu__status { display: inline-flex; align-items: center; gap: 10px; align-self: flex-start; margin: 0 0 var(--s-5);
+      padding: 6px 12px 6px 10px; border-radius: 999px; background: rgb(255 255 255 / .1); font-size: 13px; letter-spacing: .01em;
+      opacity: 0; transform: translateY(8px); transition: opacity .4s, transform .5s cubic-bezier(.2,.8,.2,1); }
+    html.o-open .o-menu__status { opacity: 1; transform: none; transition-delay: .35s; }
+    .o-dot { width: 8px; height: 8px; border-radius: 50%; background: #7ee2a8; box-shadow: 0 0 0 0 rgb(126 226 168 / .6); animation: o-beat 1.6s infinite; }
+    @keyframes o-beat { 0% { box-shadow: 0 0 0 0 rgb(126 226 168 / .6); } 80%, 100% { box-shadow: 0 0 0 9px rgb(126 226 168 / 0); } }
+
+    .o-menu__list { list-style: none; margin: 0; padding: 0; display: grid; }
+    .o-menu__list li { overflow: hidden; border-bottom: 1px solid rgb(255 255 255 / .14); }
+    .o-menu__list a { display: grid; grid-template-columns: 36px 1fr auto; align-items: baseline; gap: 8px; padding: 10px 0 8px;
+      transform: translateY(105%) rotate(4deg); transform-origin: left bottom;
+      transition: transform .6s cubic-bezier(.2,.8,.2,1), color .2s; }
+    html.o-open .o-menu__list a { transform: none; transition-delay: calc(.32s + var(--i) * .07s), 0s; }
+    .o-num { font: 500 13px/1 var(--font-mono); color: rgb(247 249 248 / .55); }
+    .o-word { font: 400 clamp(40px, 11.5vw, 64px)/1.05 var(--font-display); letter-spacing: -0.04em; }
+    .o-arr { font-size: 26px; opacity: 0; transform: translateX(-12px); transition: opacity .25s, transform .3s; }
+    .o-menu__list a:is(:hover, :focus-visible, .is-current) .o-arr { opacity: 1; transform: none; }
+    .o-menu__list a.is-current .o-num { color: #7ee2a8; }
+    .o-menu__list a.is-current .o-num::before { content: "● "; }
+    .o-menu__list a:active { color: #7ee2a8; }
+
+    .o-menu__tags { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: var(--s-5) 0 0; padding: 0; }
+    .o-menu__tags li { padding: 6px 12px; border-radius: 999px; border: 1px solid rgb(255 255 255 / .22); font-size: 13px; }
+    .o-menu__tags, .o-menu__foot { opacity: 0; transform: translateY(14px); transition: opacity .4s, transform .6s cubic-bezier(.2,.8,.2,1); }
+    html.o-open :is(.o-menu__tags, .o-menu__foot) { opacity: 1; transform: none; transition-delay: calc(.32s + var(--i) * .07s); }
+    .o-menu__foot { margin-top: auto; padding-top: var(--s-6); display: grid; gap: var(--s-3); }
+    .o-menu__foot p { margin: 0; font-size: 13px; color: rgb(247 249 248 / .7); text-align: center; }
+    .o-menu__cta.btn { width: 100%; height: 56px; justify-content: center; background: #f7f9f8; color: #06525c; font-size: 17px; border-radius: 999px; }
+  }
+  @media (max-width: 1023px) and (prefers-reduced-motion: reduce) {
+    .o-menu__bg { clip-path: none; opacity: 0; transition: opacity .2s; }
+    html.o-open .o-menu__bg { clip-path: none; opacity: 1; }
+    .o-menu__rings { display: none; }
+    .o-menu__list a, .o-menu__tags, .o-menu__foot, .o-menu__status, .o-menu__mark.mark { transform: none; transition-duration: .01s; }
+  }
+</style>
 </head>
 <body>
 <!-- type: software (site-kind software)
@@ -160,6 +284,7 @@
     <a class="skip-link" href="#top">Vai al contenuto</a>
     <a class="nav__logo" href="#top"><span class="mark" data-mark="arc" aria-hidden="true"></span>Orbeo</a>
     <nav class="nav__links" aria-label="Principale">
+      <span class="o-ind" aria-hidden="true"></span>
       <div class="nav__item">
         <a class="nav__link" href="#funzioni">Funzioni <svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <div class="nav__menu">
@@ -185,11 +310,35 @@
     <div class="nav__actions">
       <a class="btn btn--primary" href="mailto:prova@orbeo.example?subject=Prova%20gratuita">Inizia la prova gratuita</a>
     </div>
-    <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menu">
-      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <button class="o-toggle" type="button" aria-expanded="false" aria-controls="o-menu" aria-label="Apri il menu">
+      <span class="o-toggle__line"></span><span class="o-toggle__line"></span>
     </button>
   </div>
 </header>
+
+<!-- mobile menu: a full-screen "radar" that opens from the menu button -->
+<div class="o-menu" id="o-menu" aria-hidden="true" inert>
+  <div class="o-menu__bg" aria-hidden="true"></div>
+  <div class="o-menu__rings" aria-hidden="true"><i></i><i></i><i></i></div>
+  <span class="o-menu__mark mark" data-mark="arc" aria-hidden="true"></span>
+  <nav class="o-menu__inner" aria-label="Menu">
+    <p class="o-menu__status"><span class="o-dot"></span>38 siti controllati adesso</p>
+    <ol class="o-menu__list">
+      <li style="--i:0"><a href="#siti"><span class="o-num">01</span><span class="o-word">Siti</span><span class="o-arr" aria-hidden="true">→</span></a></li>
+      <li style="--i:1"><a href="#funzioni"><span class="o-num">02</span><span class="o-word">Funzioni</span><span class="o-arr" aria-hidden="true">→</span></a></li>
+      <li style="--i:2"><a href="#controlli"><span class="o-num">03</span><span class="o-word">Controlli</span><span class="o-arr" aria-hidden="true">→</span></a></li>
+      <li style="--i:3"><a href="#pricing"><span class="o-num">04</span><span class="o-word">Prezzi</span><span class="o-arr" aria-hidden="true">→</span></a></li>
+      <li style="--i:4"><a href="#faq"><span class="o-num">05</span><span class="o-word">Domande</span><span class="o-arr" aria-hidden="true">→</span></a></li>
+    </ol>
+    <ul class="o-menu__tags" style="--i:5">
+      <li>Uptime ogni 60 s</li><li>SSL e domini</li><li>Report mensile</li><li>WordPress</li>
+    </ul>
+    <div class="o-menu__foot" style="--i:6">
+      <a class="btn o-menu__cta" href="mailto:prova@orbeo.example?subject=Prova%20gratuita">Inizia la prova gratuita</a>
+      <p>14 giorni gratis, senza carta di credito.</p>
+    </div>
+  </nav>
+</div>
 
 <main id="top">
   <section class="hero hero--collage" data-enter aria-labelledby="hero-h">
@@ -542,5 +691,66 @@
 <script type="module" src="assets/motion/motion.js"></script>
 <script type="module" src="assets/layout/layout.js"></script>
 <script type="module" src="assets/diagrams/mount.js"></script>
+<script>
+(() => {
+  const root = document.documentElement, nav = document.querySelector('.nav');
+  const btn = document.querySelector('.o-toggle'), menu = document.getElementById('o-menu');
+  /* full-screen menu */
+  const setOpen = open => {
+    if (open) {
+      const r = btn.getBoundingClientRect();
+      menu.style.setProperty('--ox', (r.left + r.width / 2) + 'px');
+      menu.style.setProperty('--oy', (r.top + r.height / 2) + 'px');
+    }
+    root.classList.toggle('o-open', open);
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Chiudi il menu' : 'Apri il menu');
+    menu.setAttribute('aria-hidden', String(!open));
+    menu.inert = !open;
+    if (open) setTimeout(() => menu.querySelector('a')?.focus({ preventScroll: true }), 400);
+  };
+  btn?.addEventListener('click', () => setOpen(!root.classList.contains('o-open')));
+  menu?.addEventListener('click', e => { if (e.target.closest('a[href]')) setOpen(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && root.classList.contains('o-open')) { setOpen(false); btn.focus(); } });
+  matchMedia('(min-width: 1024px)').addEventListener('change', e => { if (e.matches) setOpen(false); });
+
+  /* capsule gets denser once the page scrolls */
+  const onScroll = () => nav.classList.toggle('is-scrolled', scrollY > 24);
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  /* sliding pill: follows the pointer, rests on the section in view */
+  const links = nav.querySelector('.nav__links'), ind = nav.querySelector('.o-ind');
+  const words = [...nav.querySelectorAll('.nav__links .nav__link')];
+  let current = null;
+  const moveTo = (a, hover) => {
+    if (!a) { ind.classList.remove('is-on'); return; }
+    const lr = links.getBoundingClientRect(), r = a.getBoundingClientRect();
+    ind.style.setProperty('--x', (r.left - lr.left) + 'px');
+    ind.style.setProperty('--w', r.width + 'px');
+    ind.classList.add('is-on');
+    ind.classList.toggle('is-hover', !!hover && a !== current);
+    words.forEach(w => w.classList.toggle('is-hot', w === a));
+  };
+  words.forEach(a => a.addEventListener('mouseenter', () => moveTo(a, true)));
+  links.addEventListener('mouseleave', () => { words.forEach(w => w.classList.remove('is-hot')); moveTo(current, false); });
+  addEventListener('resize', () => moveTo(current, false));
+
+  /* which section is in view */
+  const ids = ['siti', 'funzioni', 'controlli', 'pricing', 'faq'];
+  const secs = ids.map(id => document.getElementById(id)).filter(Boolean);
+  const mobileLinks = [...menu.querySelectorAll('.o-menu__list a')];
+  const spy = () => {
+    const y = innerHeight * 0.4; let hit = null;
+    for (const s of secs) { const r = s.getBoundingClientRect(); if (r.top <= y && r.bottom > y) hit = s.id; }
+    const a = hit ? words.find(w => w.getAttribute('href') === '#' + hit) : null;
+    if (a !== current) {
+      words.forEach(w => w.classList.toggle('is-current', w === a));
+      current = a; if (!links.matches(':hover')) moveTo(a, false);
+    }
+    mobileLinks.forEach(m => m.classList.toggle('is-current', hit && m.getAttribute('href') === '#' + hit));
+  };
+  addEventListener('scroll', spy, { passive: true }); spy();
+})();
+</script>
 </body>
 </html>
