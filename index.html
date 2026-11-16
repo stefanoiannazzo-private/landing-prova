@@ -191,6 +191,8 @@
     .o-toggle { display: inline-grid; place-items: center; position: relative; flex: none; margin-left: auto; width: 44px; height: 44px; border: 0; border-radius: 50%;
       background: var(--ink); color: var(--bg); cursor: pointer; transition: background-color .4s, color .4s, transform .25s; }
     .nav:not(.is-open) .nav__actions + .o-toggle { margin-left: 0; }
+  }
+  @media (max-width: 639px) {
     :root:has(> body > nav.actionbar) .nav .o-toggle { margin-left: auto; }
     .o-toggle:active { transform: scale(.92); }
     .o-toggle__line { position: absolute; left: 13px; width: 18px; height: 2px; border-radius: 2px; background: currentColor;
